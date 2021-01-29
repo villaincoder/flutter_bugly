@@ -201,12 +201,16 @@ class FlutterBugly {
       String filterRegExp,
       FlutterErrorDetails details) {
     //默认debug下打印异常，不上传异常
-    if (!debugUpload && _isDebug) {
+    // 修改为始终打印异常
+    // if (!debugUpload && _isDebug) {
       handler == null
           ? FlutterError.dumpErrorToConsole(details)
           : handler(details);
-      return true;
-    }
+      // return true;
+    // }
+      if (!debugUpload) {
+        return true;
+      }
     //异常过滤
     if (filterRegExp != null) {
       RegExp reg = new RegExp(filterRegExp);
